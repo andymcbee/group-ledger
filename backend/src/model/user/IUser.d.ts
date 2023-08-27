@@ -1,6 +1,6 @@
 export interface IBaseUser {
   name?: string;
-  email: string;
+  email?: string;
   password?: string;
   created_at?: Date;
 }

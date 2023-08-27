@@ -21,9 +21,13 @@
         created_at     TIMESTAMPTZ DEFAULT NOW()
     );
 
+    CREATE TYPE USER_ROLE AS ENUM ('Admin', 'User', 'Read Only');
+
+
     CREATE TABLE organization_users(
         id                VARCHAR(255) PRIMARY KEY    NOT NULL,
         organization_id   VARCHAR(255) NOT NULL,
+        user_role USER_ROLE,
         user_id           VARCHAR(255)  NOT NULL,
         created_at        TIMESTAMPTZ DEFAULT NOW(),
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
@@ -64,13 +68,17 @@ DELETE FROM users WHERE id='1';
 
     CREATE TABLE ledger_transactions(
         id                VARCHAR(255) PRIMARY KEY    NOT NULL,
+                organization_id   VARCHAR(255) NOT NULL,
+
         ledger_id         VARCHAR(255) NOT NULL,
         amount_cents      INT NOT NULL,
         description       VARCHAR(255),
         transaction_date  TIMESTAMPTZ DEFAULT NOW(),
-        transaction_type VARCHAR(225),  /*OPTIONS: credit or debit*/
+        transaction_type transaction_type,  /*OPTIONS: credit or debit*/
         created_at        TIMESTAMPTZ DEFAULT NOW(),
         FOREIGN KEY (ledger_id) REFERENCES ledgers(id) ON DELETE CASCADE
+        FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE
+
     );
 
 
@@ -78,6 +86,7 @@ DELETE FROM users WHERE id='1';
 /*Orphan records allowed if its initial transaction is deleted*/
     CREATE TABLE ledger_history(
         id                          VARCHAR(255) PRIMARY KEY    NOT NULL,
+        organization_id   VARCHAR(255) NOT NULL,
         ledger_id                   VARCHAR(255) NOT NULL,
         ledger_transaction_id       VARCHAR(255) NOT NULL,
         modified_by_user_id         VARCHAR(255) NOT NULL,
@@ -86,15 +95,22 @@ DELETE FROM users WHERE id='1';
         description                 VARCHAR(255),
         created_at                  TIMESTAMPTZ DEFAULT NOW(),
         FOREIGN KEY (ledger_id) REFERENCES ledgers(id) ON DELETE CASCADE,
+        FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE
+
 
     );
 
 
+
+
     CREATE TABLE ledger_users(
         id                VARCHAR(255) PRIMARY KEY    NOT NULL,
+        organization_id   VARCHAR(255) NOT NULL,
         ledger_id         VARCHAR(255) NOT NULL,
         user_id           VARCHAR(255)  NOT NULL,
         created_at        TIMESTAMPTZ DEFAULT NOW(),
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-        FOREIGN KEY (ledger_id) REFERENCES ledgers(id) ON DELETE CASCADE
+        FOREIGN KEY (ledger_id) REFERENCES ledgers(id) ON DELETE CASCADE,
+        FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE
+
     );

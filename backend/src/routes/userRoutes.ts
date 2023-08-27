@@ -1,8 +1,9 @@
-import { createUser } from '../controllers/userController';
+import { createUser, login, updateUser } from '../controllers/userController';
 import { Router } from 'express';
+import { userAuth } from '../services/middleware/userAuth';
 
-const router = Router();
+export const router = Router();
 
 router.post('/', createUser);
-
-module.exports = router;
+router.post('/login', login);
+router.patch('/:userId', userAuth, updateUser);
