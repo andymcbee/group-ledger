@@ -1,0 +1,65 @@
+Date : 2023-08-27 10:45:11
+Directory : /home/andrew/Desktop/repos/group-ledger
+Total : 21 files,  199 codes, 6 comments, 43 blanks, all 248 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| TypeScript         |         17 |        174 |          6 |         39 |        219 |
+| JSON               |          2 |         22 |          0 |          0 |         22 |
+| SQL                |          1 |          2 |          0 |          4 |          6 |
+| JSON with Comments |          1 |          1 |          0 |          0 |          1 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                  | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                     |         21 |        199 |          6 |         43 |        248 |
+| backend                                                                                               |         21 |        199 |          6 |         43 |        248 |
+| backend (Files)                                                                                       |          3 |         23 |          0 |          0 |         23 |
+| backend/db                                                                                            |          1 |          2 |          0 |          4 |          6 |
+| backend/src                                                                                           |         17 |        174 |          6 |         39 |        219 |
+| backend/src (Files)                                                                                   |          1 |          2 |         -2 |          1 |          1 |
+| backend/src/controllers                                                                               |          3 |        103 |          2 |         20 |        125 |
+| backend/src/model                                                                                     |          6 |         52 |          2 |         15 |         69 |
+| backend/src/model/ledger                                                                              |          1 |         17 |          2 |          6 |         25 |
+| backend/src/model/ledgerUser                                                                          |          2 |          3 |          0 |          0 |          3 |
+| backend/src/model/organizationUser                                                                    |          2 |          6 |          0 |          1 |          7 |
+| backend/src/model/user                                                                                |          1 |         26 |          0 |          8 |         34 |
+| backend/src/routes                                                                                    |          2 |          5 |          0 |          0 |          5 |
+| backend/src/services                                                                                  |          2 |          9 |          4 |          2 |         15 |
+| backend/src/services/middleware                                                                       |          2 |          9 |          4 |          2 |         15 |
+| backend/src/types                                                                                     |          3 |          3 |          0 |          1 |          4 |
+| backend/src/types (Files)                                                                             |          2 |         -6 |          0 |         -1 |         -7 |
+| backend/src/types/express                                                                             |          1 |          9 |          0 |          2 |         11 |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                              | language           | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| /home/andrew/Desktop/repos/group-ledger/backend/db/1.sql                                              | SQL                |          2 |          0 |          4 |          6 |
+| /home/andrew/Desktop/repos/group-ledger/backend/package-lock.json                                     | JSON               |         21 |          0 |          0 |         21 |
+| /home/andrew/Desktop/repos/group-ledger/backend/package.json                                          | JSON               |          1 |          0 |          0 |          1 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/app.ts                                            | TypeScript         |          2 |         -2 |          1 |          1 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/controllers/ledgerController.ts                   | TypeScript         |         23 |          0 |          4 |         27 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/controllers/organizationController.ts             | TypeScript         |          1 |          0 |          0 |          1 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/controllers/userController.ts                     | TypeScript         |         79 |          2 |         16 |         97 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/model/ledger/deleteLedger.ts                      | TypeScript         |         17 |          2 |          6 |         25 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/model/ledgerUser/ILedgerUser.d.ts                 | TypeScript         |          1 |          0 |          0 |          1 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/model/ledgerUser/createLedgerUser.ts              | TypeScript         |          2 |          0 |          0 |          2 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/model/organizationUser/IOrganizationUser.d.ts     | TypeScript         |          2 |          0 |          1 |          3 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/model/organizationUser/findOneOrganizationUser.ts | TypeScript         |          4 |          0 |          0 |          4 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/model/user/updateUser.ts                          | TypeScript         |         26 |          0 |          8 |         34 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/routes/ledgerRoutes.ts                            | TypeScript         |          3 |          0 |          0 |          3 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/routes/userRoutes.ts                              | TypeScript         |          2 |          0 |          0 |          2 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/services/middleware/userAuth.ts                   | TypeScript         |          0 |         -1 |          0 |         -1 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/services/middleware/userRoleValidator.ts          | TypeScript         |          9 |          5 |          2 |         16 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/types/UserRole.d.ts                               | TypeScript         |          1 |          0 |          1 |          2 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/types/express/index.d.ts                          | TypeScript         |          9 |          0 |          2 |         11 |
+| /home/andrew/Desktop/repos/group-ledger/backend/src/types/expressCustomTypes.d.ts                     | TypeScript         |         -7 |          0 |         -2 |         -9 |
+| /home/andrew/Desktop/repos/group-ledger/backend/tsconfig.json                                         | JSON with Comments |          1 |          0 |          0 |          1 |
+| Total                                                                                                 |                    |        199 |          6 |         43 |        248 |
++-------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

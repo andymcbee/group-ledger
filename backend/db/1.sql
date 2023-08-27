@@ -1,9 +1,11 @@
+    CREATE TYPE USER_ROLE AS ENUM ('Admin', 'User', 'Read Only');
+    CREATE TYPE transaction_type AS ENUM ('credit', 'debit');
 
 
 
-    DROP TABLE organization_users;
-    DROP TABLE users;
-    DROP TABLE organizations;
+    DROP TABLE organization_users CASCADE;
+    DROP TABLE users CASCADE;
+    DROP TABLE organizations CASCADE;
     
 
 
@@ -21,7 +23,6 @@
         created_at     TIMESTAMPTZ DEFAULT NOW()
     );
 
-    CREATE TYPE USER_ROLE AS ENUM ('Admin', 'User', 'Read Only');
 
 
     CREATE TABLE organization_users(
@@ -31,7 +32,8 @@
         user_id           VARCHAR(255)  NOT NULL,
         created_at        TIMESTAMPTZ DEFAULT NOW(),
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-        FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE
+        FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE,
+        UNIQUE (organization_id, user_id)
     );
 
 
@@ -63,7 +65,6 @@ DELETE FROM users WHERE id='1';
 /*CHANGE TRANSACTION_DATE TO NOT NULL AND NO DEFAULT VALUE LATER.*/
 
 
-    CREATE TYPE transaction_type AS ENUM ('credit', 'debit');
 
 
     CREATE TABLE ledger_transactions(
@@ -76,7 +77,7 @@ DELETE FROM users WHERE id='1';
         transaction_date  TIMESTAMPTZ DEFAULT NOW(),
         transaction_type transaction_type,  /*OPTIONS: credit or debit*/
         created_at        TIMESTAMPTZ DEFAULT NOW(),
-        FOREIGN KEY (ledger_id) REFERENCES ledgers(id) ON DELETE CASCADE
+        FOREIGN KEY (ledger_id) REFERENCES ledgers(id) ON DELETE CASCADE,
         FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE
 
     );
@@ -111,6 +112,8 @@ DELETE FROM users WHERE id='1';
         created_at        TIMESTAMPTZ DEFAULT NOW(),
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
         FOREIGN KEY (ledger_id) REFERENCES ledgers(id) ON DELETE CASCADE,
-        FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE
+        FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE,
+        UNIQUE (ledger_id, user_id)
+
 
     );

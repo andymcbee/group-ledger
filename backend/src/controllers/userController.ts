@@ -5,9 +5,78 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { IUser } from '../model/user/IUser';
 import { updateUser as updateUserInDb } from '../model/user/updateUser';
+import { v4 as uuidv4 } from 'uuid';
+import { createUser as createUserInDb } from '../model/user/createUser';
+import { createOrganizationUser as createOrganizationUserInDb } from '../model/organizationUser/createOrganizationUser';
+import { IOrganizationUser } from '../model/organizationUser/IOrganizationUser';
+import { UserRole } from '../types/UserRole';
+import { findOneOrganizationUser } from '../model/organizationUser/findOneOrganizationUser';
 
 export const createUser = async (req: Request, res: Response) => {
-  console.log('This isnt setup yet!');
+  try {
+    const { user_email, user_password, organization_id, user_role, user_name } =
+      req.body;
+
+    const existingUser = await findOneUserByEmail(user_email);
+
+    const userData: IUser = {
+      id: existingUser ? existingUser.id : uuidv4(),
+      email: user_email,
+      name: user_name
+    };
+
+    if (existingUser) {
+      const existingOrgUser = await findOneOrganizationUser(
+        userData.id,
+        organization_id
+      );
+
+      if (existingOrgUser) throw 'User exists in organization already.';
+    }
+
+    console.log(user_role);
+    if (
+      user_role !== 'Admin' &&
+      user_role !== 'User' &&
+      user_role !== 'Read Only'
+    ) {
+      console.log('IF TRIGGERED.');
+      throw 'Invalid role.';
+    }
+
+    if (!existingUser) {
+      const salt = bcrypt.genSaltSync(10);
+      const passwordHash = bcrypt.hashSync(user_password, salt);
+      userData.password = passwordHash;
+      await createUserInDb(userData);
+      //Remove password from userData obj for safety
+      delete userData.password;
+    }
+
+    const organizationUserData: IOrganizationUser = {
+      user_id: userData.id,
+      organization_id,
+      user_role: user_role as UserRole,
+      id: uuidv4()
+    };
+
+    const orgUser = await createOrganizationUserInDb(organizationUserData);
+
+    res.status(200).json({
+      success: true,
+      message: `User created successfully!`,
+      data: {
+        user: userData,
+        organization_user: orgUser
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      success: false,
+      message: error
+    });
+  }
 };
 
 export const login = async (req: Request, res: Response) => {
