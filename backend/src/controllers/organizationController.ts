@@ -12,7 +12,6 @@ import { findOneOrganizationUser } from '../model/organizationUser/findOneOrgani
 
 export const createOrganizationUser = async (req: Request, res: Response) => {
   try {
-    console.log(req);
     const { user_email, user_role, user_name } = req.body;
     const { organizationId: organization_id } = req.params;
 
@@ -80,15 +79,16 @@ export const createOrganizationUser = async (req: Request, res: Response) => {
 };
 
 export const deleteOrganizationUser = async (req: Request, res: Response) => {
-  const { organization_id, organization_user_id } = req.body;
+  // const { organization_id, organization_user_id } = req.body;
+
+  const { organizationId, organizationUserId } = req.params;
 
   const organizationUserData: IOrganizationUser = {
-    id: organization_user_id,
-    organization_id
+    id: organizationUserId,
+    organization_id: organizationId
   };
 
   try {
-    console.log('DELETE ENDPOINT HIT....');
     const user = deleteOrganizationUserInDb(
       organizationUserData.id,
       organizationUserData.organization_id
