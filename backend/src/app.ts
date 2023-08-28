@@ -6,7 +6,6 @@ import { router as organizationRouter } from './routes/organizationRoutes';
 import { router as userRouter } from './routes/userRoutes';
 import { router as ledgerRouter } from './routes/ledgerRoutes';
 import { userAuth } from './services/middleware/userAuth';
-
 const app = express();
 const port = 3000;
 

@@ -10,10 +10,13 @@ export const userAuth = async (
   res: Response,
   next: NextFunction
 ) => {
-  const organization_id = req.body.organization_id;
+  const { organizationId } = req.params;
   const jwtToken = req.cookies.jwt; // Assuming the JWT is stored in a "token" cookie
 
-  if (!jwtToken || !organization_id) {
+  console.log('REQ PARAMS INSIDE OF USER AUTH MIDDLEWARE:::');
+  console.log(organizationId);
+
+  if (!jwtToken || !organizationId) {
     return res.status(401).json({ message: 'Authentication denied.' });
   }
 
@@ -27,7 +30,7 @@ export const userAuth = async (
     //fetch org_id from db
     const valid_organization_id = await findOneOrganizationUser(
       decoded.key,
-      organization_id
+      organizationId
     );
 
     req.user_role = valid_organization_id.user_role;
@@ -38,6 +41,7 @@ export const userAuth = async (
 
     next(); // Move to the next middleware or route handler
   } catch (error) {
+    console.log('ERROR IN USER AUTH:::::::::::::::::');
     console.log(error);
     return res.status(403).json({ message: 'Invalid auth' });
   }
