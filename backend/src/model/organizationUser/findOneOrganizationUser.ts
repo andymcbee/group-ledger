@@ -1,10 +1,10 @@
 import { pool } from '../../config/db';
-import { IBaseOrganizationUser } from '../organizationUser/IOrganizationUser';
+import { IOrganizationUser } from '../organizationUser/IOrganizationUser';
 
 export const findOneOrganizationUser = async (
   user_id: string,
   organization_id: string
-): Promise<IBaseOrganizationUser | null> => {
+): Promise<IOrganizationUser | null> => {
   try {
     const query = `SELECT organization_id, user_id, id, user_role FROM organization_users WHERE user_id=$1 AND organization_id=$2`;
 

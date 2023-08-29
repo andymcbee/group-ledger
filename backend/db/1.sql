@@ -69,8 +69,7 @@ DELETE FROM users WHERE id='1';
 
     CREATE TABLE ledger_transactions(
         id                VARCHAR(255) PRIMARY KEY    NOT NULL,
-                organization_id   VARCHAR(255) NOT NULL,
-
+        organization_id   VARCHAR(255) NOT NULL,
         ledger_id         VARCHAR(255) NOT NULL,
         amount_cents      INT NOT NULL,
         description       VARCHAR(255),

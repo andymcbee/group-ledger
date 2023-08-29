@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { findOneOrganizationUser } from '../../model/organizationUser/findOneOrganizationUser';
 
 // This middleware performs the actions:
 // Confirm JWT is valid.
@@ -10,13 +9,9 @@ export const userAuth = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { organizationId } = req.params;
   const jwtToken = req.cookies.jwt; // Assuming the JWT is stored in a "token" cookie
 
-  console.log('REQ PARAMS INSIDE OF USER AUTH MIDDLEWARE:::');
-  console.log(organizationId);
-
-  if (!jwtToken || !organizationId) {
+  if (!jwtToken) {
     return res.status(401).json({ message: 'Authentication denied.' });
   }
 
@@ -26,18 +21,6 @@ export const userAuth = async (
 
     // Attach the decoded data to the request object
     req.user_id = decoded.key;
-
-    //fetch org_id from db
-    const valid_organization_id = await findOneOrganizationUser(
-      decoded.key,
-      organizationId
-    );
-
-    req.user_role = valid_organization_id.user_role;
-
-    if (!valid_organization_id) {
-      return res.status(401).json({ message: 'Authentication denied!' });
-    }
 
     next(); // Move to the next middleware or route handler
   } catch (error) {

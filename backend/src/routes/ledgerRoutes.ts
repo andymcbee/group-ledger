@@ -1,9 +1,13 @@
-import { createLedger, deleteLedger } from '../controllers/ledgerController';
 import { Router } from 'express';
-import { userAuth } from '../services/middleware/userAuth';
-import { userRoleValidator } from '../services/middleware/userRoleValidator';
+import { ensureRequestBodyHasRequiredFields } from '../services/middleware/ensureRequestBodyHasRequiredFields';
+import { createLedger, deleteLedger } from '../controllers/ledgerController';
+import { router as ledgerTransactionRouter } from './ledgerTransactionRouter';
 
-export const router = Router();
+export const router = Router({ mergeParams: true });
 
-router.post('/', userAuth, userRoleValidator(['Admin', 'User']), createLedger);
-router.delete('/:ledger_id', userAuth, deleteLedger);
+router.post('/', createLedger);
+router.delete('/:ledger_id', deleteLedger);
+
+//LEDGER TRANSACTION ENDPOINTS
+
+router.use('/:ledger_id/transaction', ledgerTransactionRouter);

@@ -1,11 +1,15 @@
 import { Request, Response } from 'express';
 import { findOneUserByEmail } from '../model/user/findOneUserByEmail';
+import { findOneUserByUserId } from '../model/user/findOneUserById';
 import { fetchUserPassword } from '../model/user/fetchUserPassword';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { IUser } from '../model/user/IUser';
+import { IOrganizationUser } from '../model/organizationUser/IOrganizationUser';
+import { IOrganization } from '../model/organization/IOrganization';
 import { updateUser as updateUserInDb } from '../model/user/updateUser';
-
+import { findAllOrganizationUsersByUserId } from '../model/organizationUser/findAllOrganizationUsersByUserId';
+import { findOneOrganizationById } from '../model/organization/findOneOrganizationById';
 export const login = async (req: Request, res: Response) => {
   try {
     const { user_email, user_password } = req.body;
@@ -84,6 +88,55 @@ export const updateUser = async (req: Request, res: Response) => {
       message: `Update user successful!`,
       data: {
         user
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      success: false,
+      message: error
+    });
+  }
+};
+
+export const me = async (req: Request, res: Response) => {
+  const user_id = req.user_id;
+
+  try {
+    const user = await findOneUserByUserId(user_id);
+
+    const userOrganizations = await findAllOrganizationUsersByUserId(user_id);
+
+    interface CombinedOrgUserAndOrg {
+      organization_id: IOrganization['id'];
+      organization_name: IOrganization['name'];
+      organization_user_role: IOrganizationUser['user_role'];
+      organization_user_id: IOrganizationUser['id'];
+      user_id: IOrganizationUser['user_id'];
+    }
+
+    const CombinedOrgUserAndOrgData: CombinedOrgUserAndOrg[] =
+      await Promise.all(
+        userOrganizations.map(async (item) => {
+          const organization = await findOneOrganizationById(
+            item.organization_id
+          );
+          return {
+            organization_id: organization.id,
+            organization_name: organization.name,
+            organization_user_role: item.user_role,
+            organization_user_id: item.id,
+            user_id: item.user_id
+          };
+        })
+      );
+
+    res.status(200).json({
+      success: true,
+      message: `User data retrieved`,
+      data: {
+        user,
+        organizations: CombinedOrgUserAndOrgData
       }
     });
   } catch (error) {

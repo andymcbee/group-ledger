@@ -7,7 +7,8 @@ import { ILedgerUser } from '../model/ledgerUser/ILedgerUser';
 import { createLedgerUser as createLedgerUserInDb } from '../model/ledgerUser/createLedgerUser';
 
 export const createLedger = async (req: Request, res: Response) => {
-  const { ledger_name, organization_id } = req.body;
+  const { ledger_name } = req.body;
+  const { organizationId: organization_id } = req.params;
 
   //Add a middleware to this route to ensure only Admin and Managers can access it.
 
@@ -48,8 +49,7 @@ export const createLedger = async (req: Request, res: Response) => {
 };
 
 export const deleteLedger = async (req: Request, res: Response) => {
-  const { ledger_id } = req.params;
-  const { organization_id } = req.body;
+  const { ledger_id, organizationId: organization_id } = req.params;
 
   const ledgerData: ILedger = {
     id: ledger_id,
