@@ -13,6 +13,12 @@ import { findOneOrganizationById } from '../model/organization/findOneOrganizati
 export const login = async (req: Request, res: Response) => {
   try {
     const { user_email, user_password } = req.body;
+    console.log('CONTROLLER, LOGIN::');
+    console.log(user_email);
+    console.log(user_password);
+
+    if (!user_email) throw 'Email required';
+    if (!user_password) throw 'Password required';
 
     const storedUserPasswordHash = await fetchUserPassword(user_email);
 
@@ -138,6 +144,22 @@ export const me = async (req: Request, res: Response) => {
         user,
         organizations: CombinedOrgUserAndOrgData
       }
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      success: false,
+      message: error
+    });
+  }
+};
+
+export const logout = async (req: Request, res: Response) => {
+  try {
+    res.clearCookie('jwt', { httpOnly: true, maxAge: 0 });
+    res.status(200).json({
+      success: true,
+      message: `Log out successful!`
     });
   } catch (error) {
     console.log(error);

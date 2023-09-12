@@ -1,7 +1,9 @@
 import { Router } from 'express';
 import {
   deleteOrganizationUser,
-  createOrganizationUser
+  createOrganizationUser,
+  fetchAllOrganizationUsers,
+  fetchSingleOrganizationUser
 } from '../controllers/organizationController';
 import { ensureRequestBodyHasRequiredFields } from '../services/middleware/ensureRequestBodyHasRequiredFields';
 import { userRoleValidator } from '../services/middleware/userRoleValidator';
@@ -17,6 +19,10 @@ router.post(
   ensureRequestBodyHasRequiredFields(['user_email', 'user_role']),
   createOrganizationUser
 );
+
+router.get('/users', fetchAllOrganizationUsers);
+
+router.get('/user/:organizationUserId', fetchSingleOrganizationUser);
 
 router.delete('/user/:organizationUserId', deleteOrganizationUser);
 

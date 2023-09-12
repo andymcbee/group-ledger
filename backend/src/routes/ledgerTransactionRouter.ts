@@ -1,11 +1,15 @@
 import { Router } from 'express';
 import { ensureRequestBodyHasRequiredFields } from '../services/middleware/ensureRequestBodyHasRequiredFields';
-import { createLedgerTransaction } from '../controllers/ledgerTransactionController';
+import {
+  createLedgerTransaction,
+  fetchAllLedgerTransactions
+} from '../controllers/ledgerTransactionController';
 
 export const router = Router({ mergeParams: true });
 
-//Create a ledger transaction
 router.post('/', createLedgerTransaction);
+router.get('/many', fetchAllLedgerTransactions);
+
 //ensure this also creates a history item
 //Required fields: amount_cents, transaction_date transaction_type
 //FOR DATE:(In UI, default it but allow user to set it)

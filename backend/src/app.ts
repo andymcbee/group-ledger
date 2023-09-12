@@ -6,8 +6,19 @@ import { router as organizationRouter } from './routes/organizationRoutes';
 import { router as userRouter } from './routes/userRoutes';
 import { userAuth } from './services/middleware/userAuth';
 import { orgUserAuth } from './services/middleware/orgUserAuth';
+import cors from 'cors';
+
 const app = express();
 const port = 3000;
+
+const allowedOrigins = ['http://localhost:5173'];
+
+const options: cors.CorsOptions = {
+  credentials: true,
+  origin: allowedOrigins
+};
+
+app.use(cors(options));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 

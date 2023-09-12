@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { createLedger as createLedgerInDb } from '../model/ledger/createLedger';
 import { deleteLedger as deleteLedgerInDb } from '../model/ledger/deleteLedger';
+import { fetchOrgLedgers as fetchOrgLedgersFromDb } from '../model/ledger/fetchOrgLedgers';
+
 import { v4 as uuidv4 } from 'uuid';
 import { ILedger } from '../model/ledger/ILedger';
 import { ILedgerUser } from '../model/ledgerUser/ILedgerUser';
@@ -62,6 +64,28 @@ export const deleteLedger = async (req: Request, res: Response) => {
     return res.status(201).json({
       success: true,
       message: `Ledger ${ledger.id} deleted!`
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      success: false,
+      message: error
+    });
+  }
+};
+
+export const fetchOrgLedgers = async (req: Request, res: Response) => {
+  // const { organization_id, organization_user_id } = req.body;
+
+  const { organizationId } = req.params;
+
+  try {
+    const ledgers = await fetchOrgLedgersFromDb(organizationId);
+
+    return res.status(201).json({
+      success: true,
+      message: 'Ledgers fetched!',
+      ledgers
     });
   } catch (error) {
     console.log(error);
