@@ -2,7 +2,7 @@ import { UserMenu } from "../../userMenu/userMenu";
 import { useContext } from "react";
 import { UserContext } from "../../../app/auth";
 
-export function AppNav(props) {
+export function AppNav() {
   const { signOut } = useContext(UserContext) ?? { user: null }; // Provide a default value for user
 
   const userMenuLinks = [

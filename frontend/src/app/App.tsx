@@ -7,7 +7,7 @@ import ledgerRoutes from "../routes/ledger/ledger";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { View } from "../components/view/view";
 import { PrivateRoute } from "./auth";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const routes = [...authRoutes, ...appRoutes, ...userRoutes, ...ledgerRoutes];
@@ -49,26 +49,3 @@ function App() {
 }
 
 export default App;
-
-/*
- <AuthProvider>
-   <BrowserRouter>
-     <Routes>
-       {routes.map((route) => {
-         return (
-           <Route
-             key={route.path}
-             path={route.path}
-             element={
-               <View
-                 display={route.view}
-                 //  layout={route.layout}
-                 //  title={route.title}
-               />
-             }
-           />
-         );
-       })}
-     </Routes>
-   </BrowserRouter>
- </AuthProvider>; */

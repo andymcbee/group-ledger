@@ -5,6 +5,7 @@ const Routes = [
     path: "/signin",
     view: Signin,
     layout: "auth",
+    permission: null,
     title: "Sign In",
   },
 ];

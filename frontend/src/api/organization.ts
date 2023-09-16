@@ -3,7 +3,7 @@ import { api, organizationRoute } from "./config/config";
 //user routes
 
 export const organizationApi = {
-  fetchOrgUsers: async (organization_id) => {
+  fetchOrgUsers: async (organization_id: string) => {
     try {
       const res = await api.request({
         url: `${organizationRoute}/${organization_id}/users`,
@@ -19,7 +19,10 @@ export const organizationApi = {
       throw error.response.data.message || "Error fetching users!";
     }
   },
-  fetchOrgUser: async (organization_id, organization_user_id) => {
+  fetchOrgUser: async (
+    organization_id: string,
+    organization_user_id: string
+  ) => {
     try {
       const res = await api.request({
         url: `${organizationRoute}/${organization_id}/user/${organization_user_id}`,

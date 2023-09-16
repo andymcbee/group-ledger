@@ -1,4 +1,3 @@
-import { styles } from "../../../styles";
 import { Link } from "react-router-dom";
 
 export function LinkButtonMain(props) {

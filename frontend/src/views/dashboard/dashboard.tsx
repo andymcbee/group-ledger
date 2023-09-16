@@ -1,27 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../app/auth";
 import { ledgerApi } from "../../api/ledger";
 import { LedgerCard } from "./components/ledgerCard";
 
-export function Dashboard(props) {
+export function Dashboard() {
   const userData = useContext(UserContext);
   const [ledgers, setLedgers] = useState(null);
 
   useEffect(() => {
-    console.log(
-      "TEST..ASD8FHAS8DFHAS8DFHASDFA98SHFA98HDF98ASF9HAS98DFHA98DHF98ADF9AH8FAS98DFHAHDF8A9DHF98AHDFH........."
-    );
     console.log(userData?.user?.user.current_organization);
     if (userData?.user?.user.current_organization) {
-      console.log("Test......");
       const fetchData = async () => {
-        console.log("FETCH!!");
         const ledgers = await ledgerApi.fetchOrgUsers(
           userData?.user?.user.current_organization
         );
 
-        console.log("Ledgers:::");
-        console.log(ledgers);
         setLedgers(ledgers);
       };
       fetchData();

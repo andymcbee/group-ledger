@@ -2,7 +2,7 @@ export interface User {
   email: string;
   id: string;
   role: string;
-  authChecked: boolean;
+  authChecked?: boolean;
   current_organization: string;
 }
 
@@ -13,5 +13,4 @@ export interface Organization {
 export interface authorizedUserData {
   user: User;
   organizations: Organization[];
-  currentOrganization: string;
 }

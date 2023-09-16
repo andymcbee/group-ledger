@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { LoadingSpinner } from "../loadingSpinner/loadingSpinner";
 
 export function View(props) {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   const layouts = {
     app: AppLayout,
@@ -13,10 +13,6 @@ export function View(props) {
   };
 
   const Layout = layouts[props.layout];
-  console.log("LAYOUT:::");
-  console.log(Layout);
-  console.log("PROPS:::");
-  console.log(props);
 
   return (
     <>

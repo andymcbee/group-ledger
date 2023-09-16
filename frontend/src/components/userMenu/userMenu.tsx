@@ -15,13 +15,13 @@ export function UserMenu(props) {
   return (
     <div className="relative inline-block">
       <BiUserCircle
-        onClick={() => toggleMenu(showMenu)}
+        onClick={() => toggleMenu(showMenu, null)}
         size={50}
         className=" rounded-full hover:cursor-pointer"
       />
       {showMenu && (
         <ul className="absolute top-full right-0 bg-white border border-gray-300 p-0 mt-2 w-52">
-          {props.children.map((item, index) => {
+          {props.children.map((item) => {
             return (
               <li
                 onClick={() => toggleMenu(showMenu, item.onClick)}
@@ -37,12 +37,4 @@ export function UserMenu(props) {
       )}
     </div>
   );
-}
-
-//<div className="w-56 bg-blue-800">
-
-{
-  /* <li className="py-2 px-4">Item 1</li>
-          <li className="py-2 px-4">Item 2</li>
-          <li className="py-2 px-4">Item 3</li> */
 }

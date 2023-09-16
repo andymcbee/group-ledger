@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 const TABLE_HEAD = ["Name", "Email", "Role", "Action"];
 
-export function Users(props) {
+export function Users() {
   const { user } = useContext(UserContext) ?? { user: null }; // Provide a default value for user
   const [tableRows, setTableRows] = useState([]);
 
@@ -15,8 +15,6 @@ export function Users(props) {
   useEffect(() => {
     const fetchData = async () => {
       const users = await organizationApi.fetchOrgUsers(current_org_id);
-      console.log("Org users:::");
-      console.log(users);
 
       const tableRowData = users.map((item) => {
         const userData = {
@@ -27,15 +25,12 @@ export function Users(props) {
         };
         return userData;
       });
-      console.log(tableRowData);
       setTableRows(tableRowData);
     };
 
     fetchData();
   }, []);
 
-  console.log("INSIDE USERS VIEW::");
-  console.log(props);
   return (
     <>
       <Card title="User Management">

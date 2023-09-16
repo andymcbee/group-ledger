@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 //ledger routes
 
 export const ledgerApi = {
-  fetchOrgUsers: async (organization_id) => {
+  fetchOrgUsers: async (organization_id: string) => {
     try {
       const res = await api.request({
         url: `${organizationRoute}/${organization_id}/ledger/many`,
@@ -19,7 +19,7 @@ export const ledgerApi = {
       throw error.response.data.message || "Error fetching users!";
     }
   },
-  createTransaction: async (organization_id, ledger_id, data) => {
+  createTransaction: async (organization_id: string, ledger_id, data) => {
     try {
       const res = await api.request({
         url: `${organizationRoute}/${organization_id}/ledger/${ledger_id}/transaction`,
@@ -36,7 +36,7 @@ export const ledgerApi = {
       throw error.response.data.message || "Error fetching users!";
     }
   },
-  fetchAllTransactions: async (organization_id, ledger_id) => {
+  fetchAllTransactions: async (organization_id: string, ledger_id: string) => {
     try {
       const res = await api.request({
         url: `${organizationRoute}/${organization_id}/ledger/${ledger_id}/transaction/many`,

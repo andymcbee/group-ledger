@@ -30,7 +30,7 @@ export function Signin() {
   };
   return (
     <Card title="Sign In">
-      <div>{userContext?.user && userContext?.user.email}</div>
+      <div>{userContext?.user && userContext?.user.user.email}</div>
       <form
         className={form}
         onSubmit={handleSubmit((data) => submitHandler(data))}

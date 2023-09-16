@@ -1,5 +1,3 @@
-import { UserMenu } from "../userMenu/userMenu";
-
-export function Header(props) {
+export function Header() {
   return <div>Header....</div>;
 }

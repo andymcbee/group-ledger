@@ -1,5 +1,5 @@
 import { Card } from "../../components/card/card";
-import { useEffect, useContext, useState } from "react";
+import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { styles } from "../../styles";
@@ -7,7 +7,7 @@ import { ledgerApi } from "../../api/ledger";
 import { UserContext } from "../../app/auth";
 import { toast } from "react-toastify";
 
-export function CreateLedgerTransaction(props) {
+export function CreateLedgerTransaction() {
   const { input, button, form, select } = styles;
 
   const location = useLocation();
@@ -79,7 +79,7 @@ export function CreateLedgerTransaction(props) {
             />
             {errors.amount?.message && (
               <small className="block text-red-600">
-                {errors.amount.message}
+                {errors.amount.message as string}
               </small>
             )}
           </div>
@@ -98,7 +98,7 @@ export function CreateLedgerTransaction(props) {
             </select>
             {errors.amount?.message && (
               <small className="block text-red-600">
-                {errors.amount.message}
+                {errors.amount.message as string}
               </small>
             )}
           </div>
@@ -115,7 +115,7 @@ export function CreateLedgerTransaction(props) {
             />
             {errors.date?.message && (
               <small className="block text-red-600">
-                {errors.date.message}
+                {errors.date.message as string}
               </small>
             )}
           </div>
@@ -129,7 +129,7 @@ export function CreateLedgerTransaction(props) {
             />
             {errors.description?.message && (
               <small className="block text-red-600">
-                {errors.description.message}
+                {errors.description.message as string}
               </small>
             )}
           </div>

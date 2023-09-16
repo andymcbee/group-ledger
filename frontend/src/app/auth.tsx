@@ -11,7 +11,6 @@ interface UserContextProps {
   user: authorizedUserData | null;
   signIn: (email: string, password: string) => Promise<void> | null;
   signOut: () => Promise<void> | null;
-  currentOrg: string;
 }
 
 type AuthProviderProps = {
@@ -22,9 +21,14 @@ export const UserContext = createContext<UserContextProps | null>(null);
 
 export function AuthProvider(props: AuthProviderProps) {
   const [user, setUser] = useState<authorizedUserData | null>({
-    user: { role: "", authChecked: false, email: "", id: "" },
+    user: {
+      role: "",
+      authChecked: false,
+      email: "",
+      id: "",
+      current_organization: "",
+    },
     organizations: [],
-    currentOrganization: "",
   });
 
   const navigate = useNavigate();

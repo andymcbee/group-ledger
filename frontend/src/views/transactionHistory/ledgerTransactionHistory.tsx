@@ -1,8 +1,6 @@
 import { Card } from "../../components/card/card";
-import { organizationApi } from "../../api/organization";
 import { useEffect, useContext, useState } from "react";
 import { UserContext } from "../../app/auth";
-import { NavLink } from "react-router-dom";
 import { ledgerApi } from "../../api/ledger";
 import { useLocation } from "react-router-dom";
 import { convertCentsToDollars } from "../../utils/convertCentsToDollars";
@@ -11,8 +9,6 @@ import { displayIsoDateAsHumanReadable } from "../../utils/displayIsoDateAsHuman
 const TABLE_HEAD = ["Amount", "Type", "Description", "Date"];
 
 export function LedgerTransactionHistory(props) {
-  console.log("Props::");
-  console.log(props);
   const { user } = useContext(UserContext) ?? { user: null }; // Provide a default value for user
   const [tableRows, setTableRows] = useState([]);
   const location = useLocation();
@@ -27,8 +23,6 @@ export function LedgerTransactionHistory(props) {
         current_organization_id,
         ledger_id
       );
-      console.log("transactions:::");
-      console.log(transactions);
 
       const tableRowData = transactions.map((item) => {
         const transactionData = {
@@ -39,7 +33,6 @@ export function LedgerTransactionHistory(props) {
         };
         return transactionData;
       });
-      console.log(tableRowData);
       setTableRows(tableRowData);
     };
 

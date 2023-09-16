@@ -1,7 +1,7 @@
 import { Card } from "../../components/card/card";
-import { useEffect, useContext, useState } from "react";
+import { useEffect } from "react";
 
-export function CreateLedger(props) {
+export function CreateLedger() {
   /*   const { user } = useContext(UserContext) ?? { user: null }; // Provide a default value for user
   const [tableRows, setTableRows] = useState([]);
 

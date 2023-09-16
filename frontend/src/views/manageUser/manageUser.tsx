@@ -1,12 +1,12 @@
 import { Card } from "../../components/card/card";
-import { organizationApi } from "../../api/organization";
-import { useEffect, useContext, useState } from "react";
-import { UserContext } from "../../app/auth";
-import { NavLink } from "react-router-dom";
+/* import { organizationApi } from "../../api/organization";
+ */ import { useEffect } from "react";
+/* import { UserContext } from "../../app/auth";
+import { NavLink } from "react-router-dom"; */
 
-const TABLE_HEAD = ["Name", "Email", "Role", "Action"];
+//const TABLE_HEAD = ["Name", "Email", "Role", "Action"];
 
-export function ManageUser(props) {
+export function ManageUser() {
   /*   const { user } = useContext(UserContext) ?? { user: null }; // Provide a default value for user
   const [tableRows, setTableRows] = useState([]);
 
